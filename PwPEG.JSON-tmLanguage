@@ -1,0 +1,108 @@
+{ "name": "PwPEG",
+  "scopeName": "source.pwpeg",
+  "fileTypes": ["pwpeg"],
+  "patterns": [
+    { "include": "#codeblock" },
+    { "include": "#comment" },
+    { "include": "#label" },
+    { "include": "#predicate" },
+    { "include": "#actionline" },
+    { "include": "#string" },
+    { "include": "#keyword" },
+    { "include": "#regexp" },
+    { "include": "#operator" },
+    { "include": "#rulename" },
+    { "include": "#bckstring" },
+    { "include": "#string_simple" }
+  ],
+  "repository": {
+    "codeblock": {
+      "name": "markup.other",
+      "begin": "%%",
+      "end": "%%",
+      "patterns": [
+        { "include": "source.python" }
+      ]
+    },
+    "bckstring": {  "name": "string.other.vld",
+       "match": "\\\\[^\\s]+"
+    },
+    "operator": {  "name": "keyword.control.vld",
+       "match": "(\\?|\\||\\*|\\+|!|&)"
+    },
+    "rulename": {  "name": "variable.other.vld",
+       "match": "[a-zA-Z_][a-zA-Z0-9_]*\\s*(skip\\s+\\w+\\s*)?="
+    },
+    "predicate": {
+      "name": "markup.other",
+      "begin": "\\{",
+      "end": "\\}",
+      "patterns": [
+        { "include": "source.python" }
+      ]
+    },
+    "actionline": {
+      "name": "markup.other",
+      "begin": "(?=->)",
+      "end": "$",
+      "patterns": [
+        { "include" : "source.python" }
+      ]
+    },
+    "indentedblock": {
+      "name": "markup.other",
+      "begin": "(\\s+)(?=[^\\s])",
+      "end": "(?!(\\1|\\s*$))",
+      "patterns": [
+        { "include": "source.python" }
+      ]
+    },
+    "actionblock": {
+      "name": "markup.other",
+      "begin": "^(?=(\\s*).*)->\\s*$",
+      "end": "^(?!(\\2\\s+|\\s*$))",
+      "patterns": [
+        { "include": "source.python" }
+      ]
+    },
+    "comment": {
+      "match": "#.*$",
+      "comment": "Comment",
+      "name": "comment.line.number-sign.pwpeg"
+    },
+    "label": {
+      "match": "\\w+\\s*:",
+      "name": "entity.name.pwpeg"
+    },
+    "keyword": {
+      "match": "\\b(set|and|or|as|if|not|else|elif|endif|in|is|default)\\b",
+      "name": "keyword.other.pwpeg"
+    },
+    "escape": {
+      "match": "\\\\.",
+      "name": "constant.character.escape.pwpeg"
+    },
+    "string": {
+      "begin": "([\"'])",
+      "end": "\\1",
+      "patterns": [
+        { "include": "#escape" }
+      ],
+      "name": "string.quoted.pwpeg"
+    },
+    "regexp": {
+      "begin": "/",
+      "end": "/[a-z]*",
+      "patterns": [
+        { "include": "#escape" },
+        { "include": "source.regexp" }
+      ],
+      "name": "string.regexp.pwpeg"
+    },
+    "number": {
+      "match": "(0x|0o)?[0-9]+(\\.[0-9]+)?",
+      "name": "constant.numeric.pwpeg"
+    }
+  },
+  "uuid": "3814d5f3-a8c7-4590-89cc-b9e343b7aef6"
+}
